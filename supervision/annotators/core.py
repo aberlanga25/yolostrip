@@ -183,7 +183,7 @@ class BoxAnnotator(BaseAnnotator):
         self,
         scene: ImageType,
         detections: Detections,
-        custom_color_lookup: np.ndarray | None = None,
+        custom_color_lookup = None,
     ) -> ImageType:
         """
         Annotates the given scene with bounding boxes based on the provided detections.

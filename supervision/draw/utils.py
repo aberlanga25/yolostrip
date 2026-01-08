@@ -216,7 +216,7 @@ def draw_text(
     text_thickness: int = 1,
     text_padding: int = 10,
     text_font: int = cv2.FONT_HERSHEY_SIMPLEX,
-    background_color: Color | None = None,
+    background_color = None,
 ) -> np.ndarray:
     """
     Draw text with background on a scene.
@@ -258,7 +258,7 @@ def draw_text(
     text_anchor_x, text_anchor_y = text_anchor.as_xy_int_tuple()
 
     text_rect = Rect(
-        x= 10, #text_anchor_x - text_width // 2,
+        x= text_anchor_x - text_width // 2,
         y=text_anchor_y - text_height // 2,
         width=text_width,
         height=text_height,
@@ -272,7 +272,7 @@ def draw_text(
     cv2.putText(
         img=scene,
         text=text,
-        org= (10, text_anchor_y + text_height // 2),#(text_anchor_x - text_width // 2, text_anchor_y + text_height // 2),
+        org= (text_anchor_x - text_width // 2, text_anchor_y + text_height // 2),
         fontFace=text_font,
         fontScale=text_scale,
         color=text_color.as_bgr(),

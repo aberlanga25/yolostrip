@@ -102,7 +102,7 @@ for con in config.sections():
         frame = img.copy()
 
         frame = box_annotator.annotate(frame, detections)
-        frame = label_annotator.annotate(frame,detections)
+        frame = label_annotator.annotate(frame, detections)
         x = 0
         parking_spots = []
         for i, zone_in in enumerate(zones_in):
@@ -111,7 +111,7 @@ for con in config.sections():
 
             detections_in_zones.append(detections)
             x += 1 if len(detections_in_zone) > 0 else 0
-            frame = sv.draw_polygon(frame, zone_in.polygon,COLORS.colors[0])
+            frame = sv.draw_polygon(frame, zone_in.polygon, COLORS.colors[0])
             polygon_center = sv.get_polygon_center(zone_in.polygon)
             text_anchor = sv.Point(x=polygon_center.x, y=polygon_center.y)
             if list_locs[i] == 0:

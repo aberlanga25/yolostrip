@@ -338,7 +338,7 @@ def joint_tracks(
     return result
 
 
-def sub_tracks(track_list_a, track_list_b) -> list[int]:
+def sub_tracks(track_list_a, track_list_b):
     """
     Returns a list of tracks from track_list_a after removing any tracks
     that share the same internal_track_id with tracks in track_list_b.
@@ -361,7 +361,7 @@ def sub_tracks(track_list_a, track_list_b) -> list[int]:
 
 def remove_duplicate_tracks(
     tracks_a, tracks_b
-) -> tuple[list[STrack], list[STrack]]:
+):
     pairwise_distance = matching.iou_distance(tracks_a, tracks_b)
     matching_pairs = np.where(pairwise_distance < 0.15)
 
