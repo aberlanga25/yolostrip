@@ -1,0 +1,8 @@
+names:
+  0: D00
+  1: D10
+  2: D20
+  3: Punchout
+path: ../../datasets/RDD-TTI
+train: train.txt
+val: val.txt
