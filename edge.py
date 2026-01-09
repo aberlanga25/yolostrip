@@ -3,7 +3,7 @@ import numpy as np
 import base64
 import requests
 import datetime
-import torch
+import logging
 from requests.auth import  HTTPDigestAuth
 import json
 from YoloStrip.yolostrip import YoloStrip
@@ -28,7 +28,7 @@ config.read(pars.config)
 
 COLORS = sv.ColorPalette.from_hex(["#E6194B", "#3CB44B", "#FFE119", "#3C76D1"])
 
-model = YoloStrip(MODEL, imgsz=1280,classes=[2,5,7])
+model = YoloStrip(MODEL, imgsz=1280, classes=[2,5,7])
 
 names = model.names
 
@@ -94,15 +94,17 @@ for con in config.sections():
         img = cv2.imdecode(np.frombuffer(img_stream.read(), np.uint8), 1)
 
         results = model(img)
-        detections = sv.Detections.from_ultralytics(results)
+        detections = sv.Detections.from_yolov5(results)
         del results
 
         detections_in_zones = []
 
+        labels = [str(model.names[x]) for x in detections.class_id]
+
         frame = img.copy()
 
         frame = box_annotator.annotate(frame, detections)
-        frame = label_annotator.annotate(frame, detections)
+        frame = label_annotator.annotate(frame, detections, labels)
         x = 0
         parking_spots = []
         for i, zone_in in enumerate(zones_in):
