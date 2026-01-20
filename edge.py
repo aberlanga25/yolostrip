@@ -146,7 +146,7 @@ for con in config.sections():
         j = json.dumps(data)
 
         try:
-            response = requests.post(URL, data=j)
+            response = requests.post(URL, data=j, timeout=5)
         except Exception as e:
             print(e)
 

@@ -20,8 +20,8 @@ def put_text(frame, text, num=1):
     return frame
 
 
-model = YoloStrip("./runs/train/RDD4/weights/best.pt", imgsz=1280, conf_thres=0.5, classes=[3])
-videos = glob.glob('../YoloSupervision/Pavement/2025-11-11/*')
+model = YoloStrip("RDD.pt", imgsz=1280, conf_thres=0.5, classes=[3])
+videos = glob.glob('./dataset/Pavement/*')
 
 for video in videos:
     filepath = os.path.basename(video)
@@ -84,9 +84,9 @@ for video in videos:
             if len(detections) > 0:
                 pnt = kml.newpoint(name=f"{num_frames}", coords=[(long, lat)])
                 for x, dets in enumerate(detections):
-                    if dets[3] == 3:
-                        os.makedirs(f'runs/{filepath}/frames',exist_ok=True)
-                        cv2.imwrite(f'runs/{filepath}/frames/{dets[3]}-{x}-{filepath}-{num_frames}.png', annotated_frame)
+                    #if dets[3] == 3:
+                    os.makedirs(f'runs/{filepath}/frames',exist_ok=True)
+                    cv2.imwrite(f'runs/{filepath}/frames/{dets[3]}-{x}-{filepath}-{num_frames}.png', annotated_frame)
             
             sink.write_frame(annotated_frame)
             
